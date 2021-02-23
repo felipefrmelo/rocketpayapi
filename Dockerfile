@@ -14,8 +14,9 @@ RUN mix local.hex --force && \
 ENV MIX_ENV=prod
 
 # install mix dependencies
-ENV DATABASE_URL=${DATABASE_URL}
-ENV SECRET_KEY_BASE=${SECRET_KEY_BASE}
+
+ENV DATABASE_URL=postgres://jhgyflxggdzdnx:b0afee3c2f93a3c2e722d0e80b450763b3986455ee73a687635453b74ab243ec@ec2-54-90-55-211.compute-1.amazonaws.com:5432/d14kkm6dsvec84
+ENV SECRET_KEY_BASE=DtDOksUeWVvBIAHwMHe9bLvGaMGvzuccpxRw0W16/vBrZ3XDH7bkykiWcZON9SgC
 COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
