@@ -17,6 +17,7 @@ ENV MIX_ENV=prod
 # ENV SECRET_KEY_BASE=DtDOksUeWVvBIAHwMHe9bLvGaMGvzuccpxRw0W16/vBrZ3XDH7bkykiWcZON9SgC
 # install mix dependencies
 ENV DATABASE_URL=$DATABASE_URL
+ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
 COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, deps.compile
