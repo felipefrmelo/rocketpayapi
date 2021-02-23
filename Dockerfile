@@ -12,13 +12,13 @@ ENV MIX_ENV=prod
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
-RUN --mount=type=cache,target=/root/.hex \
+RUN mix --mount=type=cache,target=/root/.hex \
     mix deps.get --only $MIX_ENV
 
 FROM node:15.7.0-alpine3.10 as assets
 
 # install build dependencies
-RUN -mount=type=cache,sharing=locked,target=/var/cache/apk \
+RUN mix --mount=type=cache,sharing=locked,target=/var/cache/apk \
     apk add build-base python
 
 # prepare build dir
