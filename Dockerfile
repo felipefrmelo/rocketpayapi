@@ -12,13 +12,13 @@ ENV MIX_ENV=prod
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
-RUN -d -it --mount type=cache,target=/root/.hex \
+RUN -it --mount type=cache,target=/root/.hex \
     mix deps.get --only $MIX_ENV
 
 FROM node:15.7.0-alpine3.10 as assets
 
 # install build dependencies
-RUN -d -it --mount type=cache,sharing=locked,target=/var/cache/apk \
+RUN -it --mount type=cache,sharing=locked,target=/var/cache/apk \
     apk add build-base python
 
 # prepare build dir
@@ -38,7 +38,7 @@ COPY priv priv
 # your Elixir templates, you will need to move the asset compilation step
 # down so that `lib` is available.
 COPY assets assets
-# use webpack to compile npm dependencies - https://www.npmjs.com/package/webpack-deploy
+# use webpack to compile npm dependencies - https://www.npmjs.com/package/webpackploy
 RUN npm run --prefix ./assets deploy
 
 FROM deps as build
@@ -69,7 +69,7 @@ RUN mix release
 # Start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
 FROM alpine:3.12.1 AS app
-RUN -d -it --mount type=cache,sharing=locked,target=/var/cache/apk \
+RUN -it --mount type=cache,sharing=locked,target=/var/cache/apk \
     apk add openssl ncurses-libs
 
 WORKDIR /app
