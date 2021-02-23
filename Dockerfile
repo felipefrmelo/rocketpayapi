@@ -12,13 +12,13 @@ ENV MIX_ENV=prod
 
 # install mix dependencies
 COPY mix.exs mix.lock ./
-RUN mix --mount=type=cache,target=/root/.hex \
+RUN --mount type=cache,target=/root/.hex \
     mix deps.get --only $MIX_ENV
 
 FROM node:15.7.0-alpine3.10 as assets
 
 # install build dependencies
-RUN mix --mount=type=cache,sharing=locked,target=/var/cache/apk \
+RUN --mount type=cache,sharing=locked,target=/var/cache/apk \
     apk add build-base python
 
 # prepare build dir
@@ -32,7 +32,6 @@ RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 COPY --from=deps /app/deps ./deps
 
 COPY priv priv
-
 
 # Note: if your project uses a tool like https://purgecss.com/,
 # which customizes asset compilation based on what it finds in
@@ -70,7 +69,7 @@ RUN mix release
 # Start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
 FROM alpine:3.12.1 AS app
-RUN mix --mount=type=cache,sharing=locked,target=/var/cache/apk \
+RUN --mount type=cache,sharing=locked,target=/var/cache/apk \
     apk add openssl ncurses-libs
 
 WORKDIR /app
