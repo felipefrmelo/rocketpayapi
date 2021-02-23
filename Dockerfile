@@ -13,8 +13,8 @@ RUN mix local.hex --force && \
 # set build ENV
 ENV MIX_ENV=prod
 
-ENV DATABASE_URL=postgres://jhgyflxggdzdnx:b0afee3c2f93a3c2e722d0e80b450763b3986455ee73a687635453b74ab243ec@ec2-54-90-55-211.compute-1.amazonaws.com:5432/d14kkm6dsvec84
-ENV SECRET_KEY_BASE=DtDOksUeWVvBIAHwMHe9bLvGaMGvzuccpxRw0W16/vBrZ3XDH7bkykiWcZON9SgC
+# ENV DATABASE_URL=postgres://jhgyflxggdzdnx:b0afee3c2f93a3c2e722d0e80b450763b3986455ee73a687635453b74ab243ec@ec2-54-90-55-211.compute-1.amazonaws.com:5432/d14kkm6dsvec84
+# ENV SECRET_KEY_BASE=DtDOksUeWVvBIAHwMHe9bLvGaMGvzuccpxRw0W16/vBrZ3XDH7bkykiWcZON9SgC
 # install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
@@ -42,8 +42,8 @@ RUN chown nobody:nobody /app
 
 USER nobody:nobody
 
-COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/my_app ./
+COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/rocketpay ./
 
 ENV HOME=/app
 
-CMD ["bin/my_app", "start"]
+CMD ["bin/rocketpay", "start"]
