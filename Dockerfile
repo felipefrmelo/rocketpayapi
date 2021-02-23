@@ -44,4 +44,4 @@ COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/rocketpay ./
 
 ENV HOME=/app
 
-CMD ["bin/rocketpay", "start"]
+CMD ["bin/rocketpay", "server"]
