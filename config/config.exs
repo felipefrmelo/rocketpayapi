@@ -30,6 +30,7 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-config :rocketpay,  Rocketpay.Repo,
+config :rocketpay, Rocketpay.Repo,
   migration_primary_key: [type: :binary_id],
-  migration_foreign_key: [type: :binary_id]
+  migration_foreign_key: [type: :binary_id],
+  pool: Ecto.Adapters.SQL.Sandbox

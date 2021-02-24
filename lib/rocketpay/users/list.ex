@@ -3,6 +3,6 @@ defmodule Rocketpay.Users.List do
   import Ecto.Query, only: [from: 2]
 
   def call() do
-   %{users: Repo.all(from u in User, order_by: u.inserted_at)}
+    Repo.all(from u in User, order_by: [desc: u.inserted_at]) |> Repo.preload(:account)
   end
 end
