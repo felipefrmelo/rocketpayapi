@@ -9,20 +9,18 @@ defmodule RocketpayWeb.UsersView do
           account: %Account{balance: balance, id: account_id}
         }
       }) do
-    [
-      %{
-        message: "User created",
-        user: %{
-          id: id,
-          name: name,
-          nickname: nickname,
-          account: %{
-            id: account_id,
-            balance: balance
-          }
+    %{
+      message: "User created",
+      user: %{
+        id: id,
+        name: name,
+        nickname: nickname,
+        account: %{
+          id: account_id,
+          balance: balance
         }
       }
-    ]
+    }
   end
 
   def render("list.json", %{users: users}) do
