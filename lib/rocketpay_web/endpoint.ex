@@ -10,6 +10,8 @@ defmodule RocketpayWeb.Endpoint do
     signing_salt: "6lwi2A1K"
   ]
 
+  plug CORSPlug
+
   socket("/socket", RocketpayWeb.UserSocket,
     websocket: [timeout: 45_000],
     longpoll: false
